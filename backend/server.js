@@ -10,6 +10,7 @@ const app = express();
 
 // Routes files
 const user_router = require('./routes/user.routes');
+const task_router = require('./routes/task.routes');
 
 
 // Middleweares
@@ -21,7 +22,7 @@ app.use(cors());
 
 // Routes
 app.use('/api/user', user_router);
-
+app.use('/api/task', task_router);
 
 
 // ------------------ Coneccion y servidor ------------------
@@ -35,23 +36,3 @@ DB();
 app.listen(properties.PORT, () => {
     console.log('Running on port https:/localhost:'+properties.PORT);
 })
-
-
-// mongoose.Promise = global.Promise;
-// // Con la promesa y el metodo .connect, paso la url de la BD
-// mongoose.connect(properties.dbURL, { useNewUrlParser: true, useUnifiedTopology: true  })
-//         .then((db) => {
-//             console.log('Coneccion a BD establecida');
-
-//             // Creacion del servidor 
-//             app.listen(properties.PORT, () => {
-//                 console.log('Servidor Corriendo Correctamente en localhost: '+properties.PORT);
-//             })
-
-//         })
-//         .catch((err) => {
-//             console.log(err);
-//         });
-
-
-// ------------------------
