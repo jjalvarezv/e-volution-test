@@ -7,7 +7,9 @@ module.exports = () => {
     // Connection to de database named admin-tasks
     mongoose.connect(properties.dbURL, {
         useNewUrlParser: true,
-        useUnifiedTopology: true
+        useUnifiedTopology: true,
+        useFindAndModify: false,
+        useCreateIndex: true
     })
         .then((db) => console.log('Connected to DataBase named admin-tasks'))
         .catch((err) => console.log(err));

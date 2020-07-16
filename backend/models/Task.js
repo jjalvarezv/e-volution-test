@@ -17,10 +17,12 @@ const TaskShema = Schema({
         trim: true
     },
     expirationDate: {
-        type: Date,
+        type: String,
         required: true
     },
     owner: {
-        type: User
+        type: String
     }
 });
+
+module.exports = mongoose.model('Task', TaskShema);

@@ -28,11 +28,8 @@ const userController = {
                 access_token: access_token,
                 expiresIn: expiresIn
             }
-
             return res.status(200).send(userData);
-
         });
-
     },
 
     login: function(req, res) {
