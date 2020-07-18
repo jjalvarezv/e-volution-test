@@ -1,0 +1,9 @@
+
+<h1>Este es el componente home</h1>
+
+<app-popup [visible] = "getOpc()" (close) = "setOpc($event)">
+    <h2>Nuevo Titulo</h2>
+    <div class="contenido">Este es un nuevo contenido</div>
+</app-popup>
+
+<button (click) = "showModal()">Mostrar Modal</button>

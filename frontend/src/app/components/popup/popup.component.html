@@ -1,0 +1,18 @@
+
+<div class="modal" *ngIf = "getVisible()">
+    <div class="container">
+        <div class="cont">
+            <div>
+                <div class="modalHeader">
+                    <ng-content select="h2"></ng-content>
+                    <span (click) = "closeModal()">X</span>
+                </div>
+
+                <div class="modalContent">
+                    <!--content projection-->
+                    <ng-content select=".contenido"></ng-content>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
