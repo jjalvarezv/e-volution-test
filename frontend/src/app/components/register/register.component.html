@@ -1,1 +1,30 @@
-<p>register works!</p>
+<div class="content">
+    <div>
+        <h2 class="title-page">Register</h2>
+        <section class="content-section">
+        
+            <form class="form" #formRegister="ngForm" (ngSubmit)="onRegister(formRegister)">
+    
+                <label for="name" class="form-label">Name: </label>
+                <input type="text" class="form-input" name="name" [(ngModel)]="this.name" #nombre='ngModel' required />
+    
+                <label for="email" class="form-label">Email: </label>
+                <input type="email" class="form-input" name="email" [(ngModel)]="this.email" #correo="ngModel" required />
+    
+                <label for="password" class="form-label">Password: </label>
+                <input type="password" class="form-input" name="password" [(ngModel)]="this.password" #pass="ngModel"
+                    required />
+    
+                <input class="form-btn" type="submit" value="Register" [disabled]="!formRegister.valid">
+    
+    
+                <span [ngClass]="(nombre.touched && !nombre.valid) || (correo.touched && !correo.valid)
+                    || (pass.touched && !pass.valid) ? 'active':'non-active'" class="wrongData">Los Datos son
+                    Incorrectos</span>
+                <span [ngClass] = "registerComplete ? 'active':'non-active'" class="succesful">Registro Completo</span>
+    
+            </form>
+        </section>
+    </div>
+    
+</div>

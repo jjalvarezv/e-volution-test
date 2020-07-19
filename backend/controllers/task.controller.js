@@ -49,13 +49,25 @@ module.exports = {
 
         const taskId = req.params.id;
 
-        Task.findOne({_id: taskId}, (err, taskFound) => {
+        if (taskId == undefined){
+            console.log('######')
+            Task.find({}, (err, tasks) => {
+                if (err) return res.status(500).send({message: 'Server Error'});
+                if (!tasks) return res.status(404).send({message: 'Task Not Found'});
+                
+                return res.status(200).send(tasks);
+            });
+        } else {
+            Task.findOne({_id: taskId}, (err, taskFound) => {
 
-            if (err) return res.status(500).send({message: 'Server Error'});
-            if (!taskFound) return res.status(404).send({message: 'Task Not Found'});
-            
-            return res.status(200).send({taskData: taskFound});
-        })
+                if (err) return res.status(500).send({message: 'Server Error'});
+                if (!taskFound) return res.status(404).send({message: 'Task Not Found'});
+                
+                return res.status(200).send({taskData: taskFound});
+            })
+        }
+
+        
     },
 
     deleteTask: function(req, res) {

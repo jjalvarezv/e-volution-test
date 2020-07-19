@@ -13,6 +13,7 @@ const userController = {
             email: req.body.email,
             password: bcrypt.hashSync(req.body.password)
         });
+        
 
         newUser.save((err, savedUser) => {
 
@@ -22,12 +23,13 @@ const userController = {
             const expiresIn = 24*60*60;
             const access_token = jwt.sign({_id: savedUser._id}, PRIVATE_KEY, {expiresIn});
 
-            const userData = {
+            var userData = {
                 name: savedUser.name,
                 email: savedUser.email,
                 access_token: access_token,
                 expiresIn: expiresIn
             }
+            console.log('##########-response'+userData)
             return res.status(200).send(userData);
         });
     },
@@ -57,7 +59,7 @@ const userController = {
                     access_token: access_token,
                     expiresIn: expiresIn
                 }
-                return res.status(200).send({userData});
+                return res.status(200).send(userData);
 
             } else {
                 // password incorrect

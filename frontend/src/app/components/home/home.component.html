@@ -1,9 +1,38 @@
+<app-popup [visible]="getOpc()" (close)="setOpc($event)">
+	<h2>Rellene el formulario</h2>
+	<form class="form" #formAdd="ngForm" (ngSubmit)="onAdd(formAdd)">
+        
+		<label for="email" >Email: </label> <br>
+		<input type="email"  name="email" required /><br><br>
 
-<h1>Este es el componente home</h1>
+		<label for="password" >Password: </label><br>
+		<input type="password"  name="password" required /><br><br>
 
-<app-popup [visible] = "getOpc()" (close) = "setOpc($event)">
-    <h2>Nuevo Titulo</h2>
-    <div class="contenido">Este es un nuevo contenido</div>
+		<input type="submit" value="Add Task" [disabled]="!formAdd.valid">
+
+	</form>
 </app-popup>
 
-<button (click) = "showModal()">Mostrar Modal</button>
+<!-- <button (click)="showModal()" style="display: flex;">Mostrar Modal</button> -->
+
+<div class="content">
+	<div>
+		<h2 class="title-page">My Tasks</h2>
+
+		<section class="content-section">
+
+			<button class="btn" (click)="showModal('add')">Add Task</button>
+
+			<div class="task" *ngFor="let task of tasksArray">
+				<h3>Nombre: {{task.name}}</h3>
+				<p>Prioridad: {{task.priority}}</p>
+				<p>Fecha de Expiracion: {{task.expirationDate}}</p>
+				<button class="btn" (click)="showModal('edit')">Editar</button>
+				<button class="btn" (click)="showModal('delete')">Eliminar</button>
+			</div>
+
+		</section>
+
+	</div>
+
+</div>
