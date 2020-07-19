@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit {
 
 	private saveToken(data): void{
 		localStorage.setItem('ACCESS_TOKEN', data.access_token);
-		localStorage.setItem('EXPIRES_IN', data.expiresIn);
+		localStorage.setItem('name', data.name);
 	}
 
 }
