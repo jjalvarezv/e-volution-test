@@ -1,19 +1,44 @@
 <app-popup [visible]="getOpc()" (close)="setOpc($event)">
-	<h2>Rellene el formulario</h2>
-	<form class="form" #formAdd="ngForm" (ngSubmit)="onAdd(formAdd)">
+	<h2 *ngIF="add || edit">Rellene el formulario</h2>
+	<!--Add Task-->
+	<form class="form" #formAdd="ngForm" (ngSubmit)="onAdd(formAdd)" *ngIf="add">
         
-		<label for="email" >Email: </label> <br>
-		<input type="email"  name="email" required /><br><br>
+		<label for="name" >Name: </label> <br>
+		<input type="text"  name="name" ngModel required /><br><br>
 
-		<label for="email" >Email: </label> <br>
-		<input type="email"  name="email" required /><br><br>
+		<label for="priority" >Priority: </label> <br>
+		<input type="number"  name="priority" ngModel required /><br><br>
 
-		<label for="password" >Password: </label><br>
-		<input type="password"  name="password" required /><br><br>
+		<label for="expirationDate" >Expiration Date: </label><br>
+		<input type="date"  name="expirationDate" ngModel required /><br><br>
 
 		<input type="submit" value="Add Task" [disabled]="!formAdd.valid">
 
 	</form>
+
+	<!--Delete Task-->
+	<div class="sure" *ngIf="del">
+		<h2>¿Esta Seguro que desea eliminar Task?</h2>
+		<button (click)="delTask()">Delete</button> <br>
+		<span class="succesful" style="display: none;">Task Deleted</span>
+	</div>
+
+	<!--Edit Task-->
+	<form class="form" #formEdit="ngForm" (ngSubmit)="onEdit(formEdit)" *ngIf="edit">
+        
+		<label for="name" >Name: </label> <br>
+		<input type="text"  name="name" ngModel required /><br><br>
+
+		<label for="priority" >Priority: </label> <br>
+		<input type="number"  name="priority" ngModel required /><br><br>
+
+		<label for="expirationDate" >Expiration Date: </label><br>
+		<input type="date"  name="expirationDate" ngModel required /><br><br>
+
+		<input type="submit" value="Edit Task" [disabled]="!formEdit.valid">
+
+	</form>
+
 </app-popup>
 
 <!-- <button (click)="showModal()" style="display: flex;">Mostrar Modal</button> -->
@@ -24,14 +49,14 @@
 
 		<section class="content-section">
 
-			<button class="btn" (click)="showModal('add')">Add Task</button>
+			<button class="btn" (click)="showModal('add','')">Add Task</button>
 
 			<div class="task" *ngFor="let task of tasksArray">
 				<h3>Nombre: {{task.name}}</h3>
 				<p>Prioridad: {{task.priority}}</p>
 				<p>Fecha de Expiracion: {{task.expirationDate}}</p>
-				<button class="btn" (click)="showModal('edit')">Editar</button>
-				<button class="btn" (click)="showModal('delete')">Eliminar</button>
+				<button class="btn" (click)="showModal('edit',task._id)">Editar</button>
+				<button class="btn" (click)="showModal('delete',task._id)">Eliminar</button>
 			</div>
 
 		</section>

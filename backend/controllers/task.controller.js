@@ -47,10 +47,10 @@ module.exports = {
 
     getTask: function(req, res) {
 
-        const taskId = req.params.id;
+        const taskOwner = req.params.owner;
 
-        if (taskId == undefined){
-            console.log('######')
+        if (taskOwner == undefined){
+
             Task.find({}, (err, tasks) => {
                 if (err) return res.status(500).send({message: 'Server Error'});
                 if (!tasks) return res.status(404).send({message: 'Task Not Found'});
@@ -58,12 +58,12 @@ module.exports = {
                 return res.status(200).send(tasks);
             });
         } else {
-            Task.findOne({_id: taskId}, (err, taskFound) => {
+            Task.find({owner: taskOwner}, (err, taskFound) => {
 
                 if (err) return res.status(500).send({message: 'Server Error'});
                 if (!taskFound) return res.status(404).send({message: 'Task Not Found'});
                 
-                return res.status(200).send({taskData: taskFound});
+                return res.status(200).send(taskFound);
             })
         }
 
